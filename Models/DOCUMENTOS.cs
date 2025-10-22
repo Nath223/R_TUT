@@ -12,6 +12,12 @@ namespace R_TUT.Models
         [Required]
         public string Titulo { get; set; } = string.Empty;
         [Required]
+        public  string Autor { get; set; } = string.Empty;
+        [Required]
+        public string Descripcion { get; set; } = string.Empty;
+        [Required]
+        public string Bibliografia { get; set; } = string.Empty;
+        [Required]
         public required byte[] Documento { get; set; }
     }
 }

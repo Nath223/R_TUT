@@ -1,0 +1,44 @@
+﻿@model IEnumerable<R_TUT.Models.DOCUMENTOS>
+
+@{
+    ViewData["Title"] = "Lista de Documentos";
+}
+
+<h1>Lista de Documentos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Subir Nuevo PDF</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Descripción</th>
+            <th>Bibliografía</th>
+            <th>Archivo PDF</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.Autor</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Bibliografia</td>
+                <td>
+                    <a asp-action="Descargar" asp-route-id="@item.Id" class="btn btn-sm btn-success">
+                        Ver / Descargar PDF
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
