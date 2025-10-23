@@ -1,14 +1,14 @@
 ﻿@model R_TUT.Models.DOCUMENTOS
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "EILIMAR DOCUMENTO";
 }
 
-<h1>Delete</h1>
+<h1>LEER ANTES DE CONTINUAR</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3> ¿Está seguro de que desea eliminar este documento?</h3>
 <div>
-    <h4>DOCUMENTOS</h4>
+    <h4>PROPIEDADES</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -46,6 +46,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
 </div>
