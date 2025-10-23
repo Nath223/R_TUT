@@ -10,6 +10,8 @@ namespace R_TUT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  // ✅ Autoincremental
         public int Id { get; set; }
         [Required]
+        public string Materia { get; set; } = string.Empty;
+        [Required]
         public string Titulo { get; set; } = string.Empty;
         [Required]
         public  string Autor { get; set; } = string.Empty;

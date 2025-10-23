@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using R_TUT.Data;
 using R_TUT.Models;
@@ -17,6 +18,19 @@ namespace R_TUT.Controllers
             _context = context;
         }
 
+        // Lista de materias disponibles
+        private List<SelectListItem> ObtenerMaterias()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Programación Estructurada", Text = "Programación Estructurada" },
+                new SelectListItem { Value = "Desarrollo y Programación Orientado a Objetos", Text = "Desarrollo y Programación Orientado a Objetos" },
+                new SelectListItem { Value = "Diseño y Administración de Bases de Datos", Text = "Diseño y Administración de Bases de Datos" },
+                new SelectListItem { Value = "Seguridad Informática", Text = "Seguridad Informática" },
+                new SelectListItem { Value = "Gestión de Servidores", Text = "Gestión de Servidores" }
+            };
+        }
+
         // GET: DOCUMENTOS
         public async Task<IActionResult> Index()
         {
@@ -26,14 +40,17 @@ namespace R_TUT.Controllers
         // GET: DOCUMENTOS/Create
         public IActionResult Create()
         {
+            ViewBag.Materias = ObtenerMaterias(); // ✅ Enviar lista al formulario
             return View();
         }
 
         // POST: DOCUMENTOS/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string Titulo, string Autor, string Descripcion, string Bibliografia, IFormFile Documento)
+        public async Task<IActionResult> Create(string Titulo, string Autor, string Descripcion, string Bibliografia, string Materia, IFormFile Documento)
         {
+            ViewBag.Materias = ObtenerMaterias(); // Reasigna la lista si hay error
+
             if (Documento == null || Documento.Length == 0)
             {
                 ModelState.AddModelError("Documento", "Debes seleccionar un archivo PDF.");
@@ -55,6 +72,7 @@ namespace R_TUT.Controllers
                 Autor = Autor,
                 Descripcion = Descripcion,
                 Bibliografia = Bibliografia,
+                Materia = Materia, // ✅ Nuevo campo
                 Documento = memoryStream.ToArray()
             };
 
@@ -83,13 +101,14 @@ namespace R_TUT.Controllers
             if (documento == null)
                 return NotFound();
 
+            ViewBag.Materias = ObtenerMaterias();
             return View(documento);
         }
 
         // POST: DOCUMENTOS/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Autor,Descripcion,Bibliografia")] DOCUMENTOS dOCUMENTOS)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Autor,Descripcion,Bibliografia,Materia")] DOCUMENTOS dOCUMENTOS)
         {
             if (id != dOCUMENTOS.Id)
                 return NotFound();
@@ -106,6 +125,7 @@ namespace R_TUT.Controllers
                     documentoExistente.Autor = dOCUMENTOS.Autor;
                     documentoExistente.Descripcion = dOCUMENTOS.Descripcion;
                     documentoExistente.Bibliografia = dOCUMENTOS.Bibliografia;
+                    documentoExistente.Materia = dOCUMENTOS.Materia; // ✅ Nuevo campo
 
                     _context.Update(documentoExistente);
                     await _context.SaveChangesAsync();
@@ -119,6 +139,8 @@ namespace R_TUT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Materias = ObtenerMaterias();
             return View(dOCUMENTOS);
         }
 
