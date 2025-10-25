@@ -11,8 +11,8 @@ using R_TUT.Data;
 namespace R_TUT.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251022043006_USUARIO")]
-    partial class USUARIO
+    [Migration("20251025002402_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,35 +24,41 @@ namespace R_TUT.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("R_TUT.Models.USUARIO", b =>
+            modelBuilder.Entity("R_TUT.Models.DOCUMENTOS", b =>
                 {
-                    b.Property<int>("Id_USUARIO")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_USUARIO"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Contrasena")
+                    b.Property<string>("Autor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Cuatrimestre")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Matricula")
-                        .HasColumnType("int");
-
-                    b.Property<string>("N_Usuario")
+                    b.Property<string>("Bibliografia")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id_USUARIO");
+                    b.Property<byte[]>("Documento")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
-                    b.ToTable("USUARIO");
+                    b.Property<string>("Materia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DOCUMENTOS");
                 });
 #pragma warning restore 612, 618
         }

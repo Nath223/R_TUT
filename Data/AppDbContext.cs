@@ -7,8 +7,6 @@ namespace R_TUT.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-        public DbSet<USUARIO> Usuarios { get; set; }
         public DbSet<R_TUT.Models.DOCUMENTOS> DOCUMENTOS { get; set; } = default!;
     }
 }

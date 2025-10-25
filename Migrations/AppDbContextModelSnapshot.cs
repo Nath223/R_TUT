@@ -57,37 +57,6 @@ namespace R_TUT.Migrations
 
                     b.ToTable("DOCUMENTOS");
                 });
-
-            modelBuilder.Entity("R_TUT.Models.USUARIO", b =>
-                {
-                    b.Property<int>("Id_USUARIO")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_USUARIO"));
-
-                    b.Property<string>("Contrasena")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Cuatrimestre")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Matricula")
-                        .HasColumnType("int");
-
-                    b.Property<string>("N_Usuario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id_USUARIO");
-
-                    b.ToTable("USUARIO");
-                });
 #pragma warning restore 612, 618
         }
     }
